@@ -1,0 +1,39 @@
+#adminmenu .toplevel_page_amazon-web-services {
+    div.wp-menu-image {
+        background: url("../img/icon16.png") no-repeat 7px 5px;
+    }
+    
+    &.wp-has-current-submenu, &.current, &:hover {
+        div.wp-menu-image {
+            background-position: 7px -79px;
+        }
+    }
+    
+    img {
+        display: none;
+    }
+
+	@media only screen and (-webkit-min-device-pixel-ratio: 2),
+	    only screen and (-moz-min-device-pixel-ratio: 2),
+	    only screen and (-o-min-device-pixel-ratio: 2/1),
+	    only screen and (min-device-pixel-ratio: 2) {
+
+	    div.wp-menu-image {
+	        background-image: url("../img/icon16@2x.png");
+	        background-size: 16px 100px;
+	    }
+	}
+}
+
+#icon-amazon-web-services {
+    background: url(../img/icon32.png) no-repeat;
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+        only screen and (-moz-min-device-pixel-ratio: 2),
+        only screen and (-o-min-device-pixel-ratio: 2/1),
+        only screen and (min-device-pixel-ratio: 2) {
+
+        background: url(../img/icon32@2x.png) no-repeat;
+        background-size: 32px 32px;
+    }
+}
