@@ -70,7 +70,7 @@ Create a local .env file.
 	
 or install the heroku config plugin from https://github.com/ddollar/heroku-config and pull your environment variables from Heroku.
 
-> NOTE: If you don't have a command-line mysql accessible and working, Mac/Homebrew users can brew install mysql and then follow the directions to have launchd start mysql at login. I believe the default username is root and the default password is blank.
+> NOTE: If you don't have a command-line mysql accessible and working, Mac/Homebrew users can `brew install mysql` and then follow the directions to have launchd start mysql at login. I believe the default username is root and the default password is blank.
 
 Install PHP 5.5 on Mac OS X with Homebrew if you don't already have it installed.
 
