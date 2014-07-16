@@ -1,4 +1,4 @@
-# How to setup WordPress on Heroku with the Heroku Buildpack for PHP
+## How to setup WordPress on Heroku with the Heroku Buildpack for PHP
 
 This will set up a fresh WordPress install on Heroku with the newly released [Heroku Buildpack for PHP](https://github.com/heroku/heroku-buildpack-php).
 
@@ -11,11 +11,11 @@ This will set up a fresh WordPress install on Heroku with the newly released [He
 
 ## Getting started
 
-Initialize your new repository in an empty folder
+Initialize your new repository in an empty folder.
 
 	git init
 
-Create your Heroku app
+Create your Heroku app.
 
 	heroku apps:create application-name --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-php --region eu
 
@@ -26,8 +26,7 @@ or on to add this buildpack to an existing app, run
 	heroku config:set BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-php
 
 
-
-Before you push to Heroku make sure to add the following add-ons
+Before you push to Heroku make sure to add the following add-ons.
 
 	heroku addons:add cleardb
 	heroku addons:add sendgrid
@@ -36,7 +35,7 @@ Before you push to Heroku make sure to add the following add-ons
 	heroku addons:add papertrail
 
 
-Define your AWS keys for the AWS S3 Media Uploader plugin
+Define your AWS keys for the AWS S3 Media Uploader plugin.
 
 	heroku config:set AWS_ACCESS_KEY_ID=123
 	heroku config:set AWS_SECRET_ACCESS_KEY=123
@@ -46,6 +45,13 @@ Some default configurations. WP_CACHE=true will enable Batcache with the Memcach
 
 	heroku config:set DISABLE_WP_CRON=true
 	heroku config:set WP_CACHE=true
+
+Deploy your WordPress site to Heroku.
+
+	git add .
+	git commit -am "Initial commit"
+	git push heroku master
+
 
 ## Overview
 ```
@@ -58,9 +64,14 @@ Some default configurations. WP_CACHE=true will enable Batcache with the Memcach
     └── wp                 # Where the actual WordPress install will be installed by Composer
 ```
 
+## Upgrade WordPress
+
+Update the version number for the WordPress package in composer.json and commit the changes. Do not upgrade WordPress from the admin-interface as it will not survive a restart or dyno change.
+
+
 ## Setup local development
 
-Make sure you have Composer installed first, then run
+Make sure you have [Composer](https://getcomposer.org/) installed first, then run
 
 	composer install
 
