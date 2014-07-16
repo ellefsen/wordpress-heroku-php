@@ -57,7 +57,7 @@ Deploy your WordPress site to Heroku.
 ## Overview
 ```
 └── public                 # Heroku webroot
-    ├── content            # The wp-content directory. Renamed to content to stop confusion
+    ├── content            # The wp-content directory. Renamed to content to avoid confusion with wp-content - and it looks prettier
     │   ├── plugins        # Plugins
     │   ├── mu-plugins     # Required plugins
     │   └── themes         # Your custom themes
@@ -111,6 +111,12 @@ Now to start your local dev environment run to start WordPress on http://localho
 	foreman start
 
 If you don't have foreman installed, you can do so with `gem install foreman` assuming you have Ruby running on your system. If it fails, try adding sudo in front of the command.
+
+
+## Known Issues
+
+If you try to develop locally without syncing your external memcachier envvars you might see a 500 error or a You do not have sufficient permissions to access this page. - message. Workaround is to simply remove object-cache.php and advanced-cache.php from the content dir while doing local dev. In a future release I'll try to have these files added on deploy with Composer.
+
 
 ## Sources
 

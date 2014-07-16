@@ -38,11 +38,11 @@ define("DB_HOST", "localhost" ); // Probably "localhost"
 
 define("SAVEQUERIES", true );
 
-define( "WP_DEBUG", true );
+define("WP_DEBUG", true );
 
 /** Writes the error log to /content/debug.log */
-define( "WP_DEBUG_LOG", true );
-define( "WP_DEBUG_DISPLAY", false );
+define("WP_DEBUG_LOG", true );
+define("WP_DEBUG_DISPLAY", false );
 //@ini_set( "display_errors", 0 );
 
 define("WP_POST_REVISIONS", 3 );
