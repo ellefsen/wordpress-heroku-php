@@ -4,10 +4,11 @@ This will set up a fresh WordPress install on Heroku with the newly released [He
 
 * `nginx` - Nginx for serving web content.
 * `php` - PHP-FPM for process management.
-* `wordpress` - Downloaded directly [from wordpress.org](http://wordpress.org/download/release-archive/).
+* `wordpress` - Downloaded from the Github WordPress Repo.
 * `MySQL` - ClearDB for the MySQL backend.
 * `Sendgrid` - Sendgrid for the email backend.
 * `MemCachier` - MemCachier for the memcached backend.
+* `New Relic`- Monitoring
 
 ## Getting started
 
@@ -31,7 +32,6 @@ Before you push to Heroku make sure to add the following add-ons.
 	heroku addons:add cleardb
 	heroku addons:add sendgrid
 	heroku addons:add memcachier
-	heroku addons:add scheduler
 	heroku addons:add papertrail
 	heroku addons:add newrelic
 
@@ -115,7 +115,7 @@ If you don't have foreman installed, you can do so with `gem install foreman` as
 
 ## Known Issues
 
-If you try to develop locally without syncing your external memcachier envvars you might see a 500 error or a You do not have sufficient permissions to access this page. - message. Workaround is to simply remove object-cache.php and advanced-cache.php from the content dir while doing local dev. In a future release I'll try to have these files added on deploy with Composer.
+If you try to develop locally without syncing your external MemCachier envvars you might see a 500 error or a *You do not have sufficient permissions to access this page.* - message. Workaround is to simply remove object-cache.php and advanced-cache.php from the content dir while doing local dev. In a future release I'll try to have these files added on deploy with Composer.
 
 
 ## Sources

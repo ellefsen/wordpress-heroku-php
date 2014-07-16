@@ -26,22 +26,17 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 
 	$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-	// ** MySQL settings - You can get this info from your web host ** //
 	/** The name of the database for WordPress */
 	define("DB_NAME", trim($url["path"], "/"));
-	// define("DB_NAME", "heroku_4eed1f5663e035f");
 
 	/** MySQL database username */
 	define("DB_USER", trim($url["user"]));
-	// define("DB_USER", "b7cfc877a785ae");
 
 	/** MySQL database password */
 	define("DB_PASSWORD", trim($url["pass"]));
-	// define("DB_PASSWORD", "db3717c2");
 
 	/** MySQL hostname */
 	define("DB_HOST", trim($url["host"]));
-	// define("DB_HOST", "us-cdbr-east-03.cleardb.com");
 
 	/** MySQL database port  */
 	// define("DB_PORT", trim($url["port"]));
@@ -49,7 +44,7 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	/** Database Charset to use in creating database tables. */
 	define("DB_CHARSET", "utf8");
 
-	/** Allows both foobar.com and foobar.herokuapp.com to load media assets correctly. */
+	/** Allows both foobar.com and foobar.herokuapp.com to load media assets correctly. Also adds /wp/ to give WordPress its own directory. */
 	define("WP_SITEURL", "http://" . $_SERVER["HTTP_HOST"] . "/wp/");
 	define("WP_HOME", "http://" . $_SERVER["HTTP_HOST"]);
 
@@ -66,6 +61,12 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 
 	/** Disable automatic updates, they won't survive restarting and scaling dynos */
 	define("AUTOMATIC_UPDATER_DISABLED", true );
+
+	/**  Prevent File Modifications */
+	define ("DISALLOW_FILE_EDIT", true );
+
+	/**  Prevent installation of themes or plugins */
+	define("DISALLOW_FILE_MODS", true );
 
 	/** For developers: WordPress debugging mode. */
 	define("WP_DEBUG", false);
