@@ -69,6 +69,7 @@ Create a local .env file.
 	CLEARDB_DATABASE_URL=mysql://root:123abc@127.0.0.1/my_wordpress_heroku_database_name
 	
 or install the heroku config plugin from https://github.com/ddollar/heroku-config and pull your environment variables from Heroku.
+The second option is to use the provided local-sample-config.php and rename it local-config.php. Update it with your local MySQL credentials, and you're good to go.
 
 > NOTE: If you don't have a command-line mysql accessible and working, Mac/Homebrew users can `brew install mysql` and then follow the directions to have launchd start mysql at login. I believe the default username is root and the default password is blank.
 
@@ -98,4 +99,10 @@ Now to start your local dev environment run to start WordPress on http://localho
 	foreman start
 
 If you don't have foreman installed, you can do so with `gem install foreman` assuming you have Ruby running on your system. If it fails, try adding sudo in front of the command.
-	
+
+## Sources
+
+This would not have been possible without the work and resources provided by the following people:
+
+* http://mattstauffer.co/blog/laravel-on-heroku-using-a-buildpack-locally-to-mimic-your-heroku-environment-nginx
+* https://github.com/mchung/wordpress-on-heroku
