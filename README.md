@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # How to setup WordPress on Heroku with the Heroku Buildpack for PHP
 
 This will set up a fresh WordPress install on Heroku with the newly released [Heroku Buildpack for PHP](https://github.com/heroku/heroku-buildpack-php).
@@ -41,9 +40,9 @@ Define your AWS keys for the AWS S3 Media Uploader plugin
 	heroku config:set AWS_SECRET_ACCESS_KEY=123
 
 
-Some default configurations. WP_CACGE=true will enable Batcache with the Memcachier addon.
+Some default configurations. WP_CACHE=true will enable Batcache with the Memcachier addon.
 
-	heroku config:set DISABLE_WP_CRON=false
+	heroku config:set DISABLE_WP_CRON=true
 	heroku config:set WP_CACHE=true
 
 ## Overview
@@ -90,8 +89,3 @@ Open a new shell and run `php -v` and `php-fpm -v` and make sure they both read 
 Add this below Heroku Toolbelt setting to swap the PHP you use on the command line.
 
 	export PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
-
-=======
-wordpress-heroku-php
-====================
->>>>>>> 9dbe8bf41a8570570c163c815c23498a926231e1
