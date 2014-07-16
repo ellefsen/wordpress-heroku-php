@@ -12,9 +12,7 @@ This will set up a fresh WordPress install on Heroku with the newly released [He
 
 ## Getting started
 
-Initialize your new repository in an empty folder.
-
-	git init
+Clone this repository into a new directory.
 
 Create your Heroku app.
 
