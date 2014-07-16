@@ -33,6 +33,7 @@ Before you push to Heroku make sure to add the following add-ons.
 	heroku addons:add memcachier
 	heroku addons:add scheduler
 	heroku addons:add papertrail
+	heroku addons:add newrelic
 
 
 Define your AWS keys for the AWS S3 Media Uploader plugin.
