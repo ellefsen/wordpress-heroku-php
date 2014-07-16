@@ -17,9 +17,11 @@ Initialize your new repository in an empty folder
 
 Create your Heroku app
 
-	heroku create -s cedar --buildpack https://github.com/heroku/heroku-buildpack-php -region eu
+	heroku apps:create application-name --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-php --region eu
 
-or on an existing app
+`--region eu` is for deploying your app in the European region.
+
+or on to add this buildpack to an existing app, run
 
 	heroku config:set BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-php
 
