@@ -60,7 +60,7 @@ Some default configurations. WP_CACHE=true will enable Batcache with the Memcach
 
 ## Setup local development
 
-Make sure you have Composer installed first
+Make sure you have Composer installed first, then run
 
 	composer install
 
@@ -91,3 +91,11 @@ Open a new shell and run `php -v` and `php-fpm -v` and make sure they both read 
 Add this below Heroku Toolbelt setting to swap the PHP you use on the command line.
 
 	export PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
+
+
+Now to start your local dev environment run to start WordPress on http://localhost:5000/
+	
+	foreman start
+
+If you don't have foreman installed, you can do so with `gem install foreman` assuming you have Ruby running on your system. If it fails, try adding sudo in front of the command.
+	
