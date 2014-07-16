@@ -67,7 +67,7 @@ Deploy your WordPress site to Heroku.
 
 ## Upgrade WordPress
 
-Update the version number for the WordPress package in composer.json and commit the changes. Do not upgrade WordPress from the admin-interface as it will not survive a restart or dyno change.
+Update the version number for the WordPress package in composer.json, then run `composer update` and commit the changes in composer.json and composer.lock. Do not upgrade WordPress from the admin-interface as it will not survive a restart or dyno change.
 
 
 ## Setup local development
