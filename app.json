@@ -1,0 +1,32 @@
+{
+  "name": "WordPress Heroku PHP",
+  "description": "Template for deploying WordPress to Heroku",
+  "repository": "https://github.com/ellefsen/wordpress-heroku-php",
+  "success_url": "/",
+  "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-php",
+    "AWS_ACCESS_KEY_ID": {
+      "description": "The Amazon Access Key.",
+      "value": "123"
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "description": "The Amazon Secret Access Key.",
+      "value": "123"
+    },
+    "DISABLE_WP_CRON": {
+      "description": "Disable WordPress internal cron-job.",
+      "value": "true"
+    },
+    "WP_CACHE": {
+      "description": "Enable caching via Memcachier and Batcache.",
+      "value": "true"
+    }
+  },
+  "addons": [
+    "cleardb",
+    "sendgrid",
+    "memcachier",
+    "papertrail",
+    "newrelic"
+  ]
+}

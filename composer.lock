@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9cbec636e2bc3b07e4b92b51522a4619",
+    "hash": "f0011da56d2859bfb261ab190feb77db",
     "packages": [
         {
             "name": "fancyguy/webroot-installer",
@@ -50,10 +50,10 @@
         },
         {
             "name": "wordpress",
-            "version": "3.9.1",
+            "version": "3.9.2",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/WordPress/WordPress/archive/3.9.1.zip",
+                "url": "https://github.com/WordPress/WordPress/archive/3.9.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -70,12 +70,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "af189a161081993cad1c1cd3622373f705f502b2"
+                "reference": "5b715c36a6e0d3d1c9803e6409256633cdadf05b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/af189a161081993cad1c1cd3622373f705f502b2",
-                "reference": "af189a161081993cad1c1cd3622373f705f502b2",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/5b715c36a6e0d3d1c9803e6409256633cdadf05b",
+                "reference": "5b715c36a6e0d3d1c9803e6409256633cdadf05b",
                 "shasum": ""
             },
             "bin": [
@@ -106,7 +106,7 @@
                 "nginx",
                 "php"
             ],
-            "time": "2014-07-16 09:57:17"
+            "time": "2014-08-07 21:25:54"
         }
     ],
     "aliases": [],
