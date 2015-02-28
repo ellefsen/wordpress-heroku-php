@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7cde41c4a3093ad7bee6a0685dd7142e",
+    "hash": "5a09a3b2078521129a96c83b498e34f3",
     "packages": [
         {
             "name": "fancyguy/webroot-installer",
@@ -50,10 +50,10 @@
         },
         {
             "name": "wordpress",
-            "version": "4.0",
+            "version": "4.1.1",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/WordPress/WordPress/archive/4.0.zip",
+                "url": "https://github.com/WordPress/WordPress/archive/4.1.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -70,12 +70,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "cda1c2e7cfe00c78404bc20dc6b7ba139a5e093f"
+                "reference": "aea81319f561cf2eb581736b9b30e7a81c48363b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/cda1c2e7cfe00c78404bc20dc6b7ba139a5e093f",
-                "reference": "cda1c2e7cfe00c78404bc20dc6b7ba139a5e093f",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/aea81319f561cf2eb581736b9b30e7a81c48363b",
+                "reference": "aea81319f561cf2eb581736b9b30e7a81c48363b",
                 "shasum": ""
             },
             "bin": [
@@ -106,7 +106,7 @@
                 "nginx",
                 "php"
             ],
-            "time": "2014-09-11 03:04:06"
+            "time": "2015-02-19 09:59:04"
         }
     ],
     "aliases": [],
@@ -115,6 +115,7 @@
         "heroku/heroku-buildpack-php": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.0"
     },
