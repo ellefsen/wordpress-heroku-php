@@ -105,7 +105,7 @@ Open a new shell and run `php -v` and `php-fpm -v` and make sure they both read 
 
   PATH="/usr/local/sbin:$PATH"
 
-Add this below Heroku Toolbelt setting to swap the PHP you use on the command line.
+Add this below Heroku Toolbelt setting in .bashrc or .bash_profile to swap the PHP you use on the command line.
 
 	export PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
 
