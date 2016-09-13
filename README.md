@@ -109,17 +109,13 @@ Add this below Heroku Toolbelt setting in .bashrc or .bash_profile to swap the P
 
 	export PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
 
+Delete/remove `public/content/object-cache.php` and `public/content/advanced-cache.php`. If you try to develop locally without syncing your external MemCachier envvars you might see a 500 error or a *You do not have sufficient permissions to access this page.* - message. Workaround is to simply remove object-cache.php and advanced-cache.php. In a future release I'll try to have these files added on deploy with Composer.
 
 Now to start your local dev environment run to start WordPress on http://localhost:5000/
 	
 	foreman start
 
 If you don't have foreman installed, you can do so with `gem install foreman` assuming you have Ruby running on your system. If it fails, try adding sudo in front of the command.
-
-
-## Known Issues
-
-If you try to develop locally without syncing your external MemCachier envvars you might see a 500 error or a *You do not have sufficient permissions to access this page.* - message. Workaround is to simply remove object-cache.php and advanced-cache.php from the content dir while doing local dev. In a future release I'll try to have these files added on deploy with Composer.
 
 
 ## Sources
