@@ -65,6 +65,11 @@ return array (
             'https' => true,
             'hostname' => 'iam.amazonaws.com',
         ),
+        'cn-north-1' => array(
+            'http' => false,
+            'https' => true,
+            'hostname' => 'iam.cn-north-1.amazonaws.com.cn',
+        ),
         'us-gov-west-1' => array(
             'http' => false,
             'https' => true,
@@ -72,6 +77,57 @@ return array (
         ),
     ),
     'operations' => array(
+        'AddClientIDToOpenIDConnectProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'AddClientIDToOpenIDConnectProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'OpenIDConnectProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'ClientID' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 255,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
         'AddRoleToInstanceProfile' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -117,6 +173,10 @@ return array (
                     'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
                     'class' => 'LimitExceededException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'AddUserToGroup' => array(
@@ -159,6 +219,163 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
                     'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'AttachGroupPolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'AttachGroupPolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'GroupName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 128,
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'AttachRolePolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'AttachRolePolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'RoleName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'AttachUserPolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'AttachUserPolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'UserName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -203,6 +420,22 @@ return array (
                     'reason' => 'The request was rejected because the type of user for the transaction was incorrect.',
                     'class' => 'InvalidUserTypeException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that is temporarily unmodifiable, such as a user name that was deleted and then recreated. The error indicates that the request is likely to succeed if you try again after waiting several minutes. The error message describes the entity.',
+                    'class' => 'EntityTemporarilyUnmodifiableException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the provided password did not meet the requirements imposed by the account password policy.',
+                    'class' => 'PasswordPolicyViolationException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'CreateAccessKey' => array(
@@ -238,6 +471,10 @@ return array (
                     'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
                     'class' => 'LimitExceededException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'CreateAccountAlias' => array(
@@ -269,6 +506,14 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it attempted to create a resource that already exists.',
                     'class' => 'EntityAlreadyExistsException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -316,6 +561,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'CreateInstanceProfile' => array(
@@ -358,6 +607,10 @@ return array (
                     'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
                     'class' => 'LimitExceededException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'CreateLoginProfile' => array(
@@ -391,6 +644,11 @@ return array (
                     'minLength' => 1,
                     'maxLength' => 128,
                 ),
+                'PasswordResetRequired' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
             ),
             'errorResponses' => array(
                 array(
@@ -404,6 +662,205 @@ return array (
                 array(
                     'reason' => 'The request was rejected because the provided password did not meet the requirements imposed by the account password policy.',
                     'class' => 'PasswordPolicyViolationException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'CreateOpenIDConnectProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'CreateOpenIDConnectProviderResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'CreateOpenIDConnectProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'Url' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 255,
+                ),
+                'ClientIDList' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'ClientIDList.member',
+                    'items' => array(
+                        'name' => 'clientIDType',
+                        'type' => 'string',
+                        'minLength' => 1,
+                        'maxLength' => 255,
+                    ),
+                ),
+                'ThumbprintList' => array(
+                    'required' => true,
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'ThumbprintList.member',
+                    'items' => array(
+                        'name' => 'thumbprintType',
+                        'type' => 'string',
+                        'minLength' => 40,
+                        'maxLength' => 40,
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create a resource that already exists.',
+                    'class' => 'EntityAlreadyExistsException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'CreatePolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'CreatePolicyResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'CreatePolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'PolicyName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 128,
+                ),
+                'Path' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'PolicyDocument' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 131072,
+                ),
+                'Description' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'maxLength' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create a resource that already exists.',
+                    'class' => 'EntityAlreadyExistsException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the policy document was malformed. The error message describes the specific error.',
+                    'class' => 'MalformedPolicyDocumentException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'CreatePolicyVersion' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'CreatePolicyVersionResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'CreatePolicyVersion',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'PolicyDocument' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 131072,
+                ),
+                'SetAsDefault' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the policy document was malformed. The error message describes the specific error.',
+                    'class' => 'MalformedPolicyDocumentException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -458,6 +915,61 @@ return array (
                     'reason' => 'The request was rejected because the policy document was malformed. The error message describes the specific error.',
                     'class' => 'MalformedPolicyDocumentException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'CreateSAMLProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'CreateSAMLProviderResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'CreateSAMLProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'SAMLMetadataDocument' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1000,
+                    'maxLength' => 10000000,
+                ),
+                'Name' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 128,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create a resource that already exists.',
+                    'class' => 'EntityAlreadyExistsException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'CreateUser' => array(
@@ -504,6 +1016,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'CreateVirtualMFADevice' => array(
@@ -544,6 +1060,10 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it attempted to create a resource that already exists.',
                     'class' => 'EntityAlreadyExistsException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -588,6 +1108,14 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'DeleteAccessKey' => array(
@@ -626,6 +1154,14 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'DeleteAccountAlias' => array(
@@ -658,6 +1194,14 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'DeleteAccountPasswordPolicy' => array(
@@ -682,6 +1226,14 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -718,6 +1270,14 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it attempted to delete a resource that has attached subordinate entities. The error message describes these entities.',
                     'class' => 'DeleteConflictException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -758,6 +1318,14 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'DeleteInstanceProfile' => array(
@@ -793,6 +1361,14 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it attempted to delete a resource that has attached subordinate entities. The error message describes these entities.',
                     'class' => 'DeleteConflictException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -830,6 +1406,155 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'DeleteOpenIDConnectProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DeleteOpenIDConnectProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'OpenIDConnectProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'DeletePolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DeletePolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to delete a resource that has attached subordinate entities. The error message describes these entities.',
+                    'class' => 'DeleteConflictException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'DeletePolicyVersion' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DeletePolicyVersion',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'VersionId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to delete a resource that has attached subordinate entities. The error message describes these entities.',
+                    'class' => 'DeleteConflictException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'DeleteRole' => array(
@@ -866,6 +1591,14 @@ return array (
                     'reason' => 'The request was rejected because it attempted to delete a resource that has attached subordinate entities. The error message describes these entities.',
                     'class' => 'DeleteConflictException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'DeleteRolePolicy' => array(
@@ -897,6 +1630,97 @@ return array (
                     'type' => 'string',
                     'location' => 'aws.query',
                     'minLength' => 1,
+                    'maxLength' => 128,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'DeleteSAMLProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DeleteSAMLProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'SAMLProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'DeleteSSHPublicKey' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DeleteSSHPublicKey',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'UserName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'SSHPublicKeyId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
                     'maxLength' => 128,
                 ),
             ),
@@ -941,6 +1765,14 @@ return array (
                     'reason' => 'The request was rejected because it attempted to delete a resource that has attached subordinate entities. The error message describes these entities.',
                     'class' => 'DeleteConflictException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'DeleteSigningCertificate' => array(
@@ -979,6 +1811,14 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'DeleteUser' => array(
@@ -1008,12 +1848,20 @@ return array (
             ),
             'errorResponses' => array(
                 array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
                 array(
                     'reason' => 'The request was rejected because it attempted to delete a resource that has attached subordinate entities. The error message describes these entities.',
                     'class' => 'DeleteConflictException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1054,6 +1902,14 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'DeleteVirtualMFADevice' => array(
@@ -1089,6 +1945,167 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it attempted to delete a resource that has attached subordinate entities. The error message describes these entities.',
                     'class' => 'DeleteConflictException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'DetachGroupPolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DetachGroupPolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'GroupName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 128,
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'DetachRolePolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DetachRolePolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'RoleName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'DetachUserPolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DetachUserPolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'UserName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1159,6 +2176,117 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'GenerateCredentialReport' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GenerateCredentialReportResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GenerateCredentialReport',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'GetAccessKeyLastUsed' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetAccessKeyLastUsedResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetAccessKeyLastUsed',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'AccessKeyId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 16,
+                    'maxLength' => 32,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+            ),
+        ),
+        'GetAccountAuthorizationDetails' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetAccountAuthorizationDetailsResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetAccountAuthorizationDetails',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'Filter' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'Filter.member',
+                    'items' => array(
+                        'name' => 'EntityType',
+                        'type' => 'string',
+                    ),
+                ),
+                'MaxItems' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 1000,
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 320,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'GetAccountPasswordPolicy' => array(
@@ -1184,6 +2312,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'GetAccountSummary' => array(
@@ -1202,6 +2334,49 @@ return array (
                     'static' => true,
                     'location' => 'aws.query',
                     'default' => '2010-05-08',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'GetCredentialReport' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetCredentialReportResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetCredentialReport',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because the credential report does not exist. To generate a credential report, use GenerateCredentialReport.',
+                    'class' => 'CredentialReportNotPresentException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the most recent credential report has expired. To generate a new credential report, use GenerateCredentialReport. For more information about credential report expiration, see Getting Credential Reports in the Using IAM guide.',
+                    'class' => 'CredentialReportExpiredException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the credential report is still being generated.',
+                    'class' => 'CredentialReportNotReadyException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1247,6 +2422,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'GetGroupPolicy' => array(
@@ -1286,6 +2465,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'GetInstanceProfile' => array(
@@ -1317,6 +2500,10 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1350,6 +2537,135 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'GetOpenIDConnectProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetOpenIDConnectProviderResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetOpenIDConnectProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'OpenIDConnectProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'GetPolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetPolicyResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetPolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'GetPolicyVersion' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetPolicyVersionResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetPolicyVersion',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'VersionId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'GetRole' => array(
@@ -1381,6 +2697,10 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1421,6 +2741,98 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'GetSAMLProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetSAMLProviderResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetSAMLProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'SAMLProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'GetSSHPublicKey' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetSSHPublicKeyResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetSSHPublicKey',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'UserName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'SSHPublicKeyId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 128,
+                ),
+                'Encoding' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the public key encoding format is unsupported or unrecognized.',
+                    'class' => 'UnrecognizedPublicKeyEncodingException',
+                ),
             ),
         ),
         'GetServerCertificate' => array(
@@ -1453,6 +2865,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'GetUser' => array(
@@ -1483,6 +2899,10 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1522,6 +2942,10 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1566,6 +2990,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'ListAccountAliases' => array(
@@ -1596,6 +3024,242 @@ return array (
                     'location' => 'aws.query',
                     'minimum' => 1,
                     'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'ListAttachedGroupPolicies' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListAttachedGroupPoliciesResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListAttachedGroupPolicies',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'GroupName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 128,
+                ),
+                'PathPrefix' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 320,
+                ),
+                'MaxItems' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'ListAttachedRolePolicies' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListAttachedRolePoliciesResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListAttachedRolePolicies',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'RoleName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'PathPrefix' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 320,
+                ),
+                'MaxItems' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'ListAttachedUserPolicies' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListAttachedUserPoliciesResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListAttachedUserPolicies',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'UserName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'PathPrefix' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 320,
+                ),
+                'MaxItems' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'ListEntitiesForPolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListEntitiesForPolicyResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListEntitiesForPolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'EntityFilter' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'PathPrefix' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 512,
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 320,
+                ),
+                'MaxItems' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1641,6 +3305,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'ListGroups' => array(
@@ -1677,6 +3345,12 @@ return array (
                     'location' => 'aws.query',
                     'minimum' => 1,
                     'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1722,6 +3396,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'ListInstanceProfiles' => array(
@@ -1758,6 +3436,12 @@ return array (
                     'location' => 'aws.query',
                     'minimum' => 1,
                     'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1803,6 +3487,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'ListMFADevices' => array(
@@ -1845,6 +3533,137 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'ListOpenIDConnectProviders' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListOpenIDConnectProvidersResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListOpenIDConnectProviders',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'ListPolicies' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListPoliciesResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListPolicies',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'Scope' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'OnlyAttached' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'PathPrefix' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 320,
+                ),
+                'MaxItems' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'ListPolicyVersions' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListPolicyVersionsResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListPolicyVersions',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 320,
+                ),
+                'MaxItems' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -1890,6 +3709,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'ListRoles' => array(
@@ -1928,6 +3751,80 @@ return array (
                     'maximum' => 1000,
                 ),
             ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'ListSAMLProviders' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListSAMLProvidersResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListSAMLProviders',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'ListSSHPublicKeys' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListSSHPublicKeysResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListSSHPublicKeys',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'UserName' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 320,
+                ),
+                'MaxItems' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+            ),
         ),
         'ListServerCertificates' => array(
             'httpMethod' => 'POST',
@@ -1963,6 +3860,12 @@ return array (
                     'location' => 'aws.query',
                     'minimum' => 1,
                     'maximum' => 1000,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -2006,6 +3909,10 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -2051,6 +3958,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'ListUsers' => array(
@@ -2089,6 +4000,12 @@ return array (
                     'maximum' => 1000,
                 ),
             ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
         ),
         'ListVirtualMFADevices' => array(
             'httpMethod' => 'POST',
@@ -2110,11 +4027,6 @@ return array (
                 'AssignmentStatus' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
-                    'enum' => array(
-                        'Assigned',
-                        'Unassigned',
-                        'Any',
-                    ),
                 ),
                 'Marker' => array(
                     'type' => 'string',
@@ -2182,6 +4094,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'PutRolePolicy' => array(
@@ -2235,6 +4151,10 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -2290,6 +4210,57 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'RemoveClientIDFromOpenIDConnectProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'RemoveClientIDFromOpenIDConnectProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'OpenIDConnectProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'ClientID' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 255,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'RemoveRoleFromInstanceProfile' => array(
@@ -2329,6 +4300,14 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'RemoveUserFromGroup' => array(
@@ -2367,6 +4346,14 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -2425,6 +4412,63 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'SetDefaultPolicyVersion' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'SetDefaultPolicyVersion',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'PolicyArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'VersionId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'UpdateAccessKey' => array(
@@ -2461,16 +4505,20 @@ return array (
                     'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
-                    'enum' => array(
-                        'Active',
-                        'Inactive',
-                    ),
                 ),
             ),
             'errorResponses' => array(
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -2522,6 +4570,23 @@ return array (
                     'format' => 'boolean-string',
                     'location' => 'aws.query',
                 ),
+                'MaxPasswordAge' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 1095,
+                ),
+                'PasswordReusePrevention' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 24,
+                ),
+                'HardExpiry' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
             ),
             'errorResponses' => array(
                 array(
@@ -2531,6 +4596,14 @@ return array (
                 array(
                     'reason' => 'The request was rejected because the policy document was malformed. The error message describes the specific error.',
                     'class' => 'MalformedPolicyDocumentException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -2574,6 +4647,14 @@ return array (
                 array(
                     'reason' => 'The request was rejected because the policy document was malformed. The error message describes the specific error.',
                     'class' => 'MalformedPolicyDocumentException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -2623,6 +4704,14 @@ return array (
                     'reason' => 'The request was rejected because it attempted to create a resource that already exists.',
                     'class' => 'EntityAlreadyExistsException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'UpdateLoginProfile' => array(
@@ -2650,11 +4739,15 @@ return array (
                     'maxLength' => 64,
                 ),
                 'Password' => array(
-                    'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
                     'minLength' => 1,
                     'maxLength' => 128,
+                ),
+                'PasswordResetRequired' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
                 ),
             ),
             'errorResponses' => array(
@@ -2669,6 +4762,161 @@ return array (
                 array(
                     'reason' => 'The request was rejected because the provided password did not meet the requirements imposed by the account password policy.',
                     'class' => 'PasswordPolicyViolationException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'UpdateOpenIDConnectProviderThumbprint' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'UpdateOpenIDConnectProviderThumbprint',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'OpenIDConnectProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'ThumbprintList' => array(
+                    'required' => true,
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'ThumbprintList.member',
+                    'items' => array(
+                        'name' => 'thumbprintType',
+                        'type' => 'string',
+                        'minLength' => 40,
+                        'maxLength' => 40,
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'UpdateSAMLProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'UpdateSAMLProviderResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'UpdateSAMLProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'SAMLMetadataDocument' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1000,
+                    'maxLength' => 10000000,
+                ),
+                'SAMLProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'UpdateSSHPublicKey' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'UpdateSSHPublicKey',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'UserName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'SSHPublicKeyId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 128,
+                ),
+                'Status' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
                 ),
             ),
         ),
@@ -2718,6 +4966,14 @@ return array (
                     'reason' => 'The request was rejected because it attempted to create a resource that already exists.',
                     'class' => 'EntityAlreadyExistsException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'UpdateSigningCertificate' => array(
@@ -2754,16 +5010,20 @@ return array (
                     'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
-                    'enum' => array(
-                        'Active',
-                        'Inactive',
-                    ),
                 ),
             ),
             'errorResponses' => array(
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -2810,12 +5070,75 @@ return array (
                     'class' => 'NoSuchEntityException',
                 ),
                 array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
                     'reason' => 'The request was rejected because it attempted to create a resource that already exists.',
                     'class' => 'EntityAlreadyExistsException',
                 ),
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that is temporarily unmodifiable, such as a user name that was deleted and then recreated. The error indicates that the request is likely to succeed if you try again after waiting several minutes. The error message describes the entity.',
                     'class' => 'EntityTemporarilyUnmodifiableException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
+            ),
+        ),
+        'UploadSSHPublicKey' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'UploadSSHPublicKeyResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'UploadSSHPublicKey',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'UserName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'SSHPublicKeyBody' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 16384,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the public key is malformed or otherwise invalid.',
+                    'class' => 'InvalidPublicKeyException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the SSH public key is already associated with the specified IAM user.',
+                    'class' => 'DuplicateSSHPublicKeyException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the public key encoding format is unsupported or unrecognized.',
+                    'class' => 'UnrecognizedPublicKeyEncodingException',
                 ),
             ),
         ),
@@ -2887,6 +5210,10 @@ return array (
                     'reason' => 'The request was rejected because the public key certificate and the private key do not match.',
                     'class' => 'KeyPairMismatchException',
                 ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
+                ),
             ),
         ),
         'UploadSigningCertificate' => array(
@@ -2938,12 +5265,16 @@ return array (
                     'class' => 'InvalidCertificateException',
                 ),
                 array(
-                    'reason' => 'The request was rejected because the same certificate is associated to another user under the account.',
+                    'reason' => 'The request was rejected because the same certificate is associated with an IAM user in the account.',
                     'class' => 'DuplicateCertificateException',
                 ),
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
+                    'class' => 'ServiceFailureException',
                 ),
             ),
         ),
@@ -3076,6 +5407,85 @@ return array (
                         'CreateDate' => array(
                             'type' => 'string',
                         ),
+                        'PasswordResetRequired' => array(
+                            'type' => 'boolean',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'CreateOpenIDConnectProviderResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'OpenIDConnectProviderArn' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'CreatePolicyResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Policy' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'PolicyName' => array(
+                            'type' => 'string',
+                        ),
+                        'PolicyId' => array(
+                            'type' => 'string',
+                        ),
+                        'Arn' => array(
+                            'type' => 'string',
+                        ),
+                        'Path' => array(
+                            'type' => 'string',
+                        ),
+                        'DefaultVersionId' => array(
+                            'type' => 'string',
+                        ),
+                        'AttachmentCount' => array(
+                            'type' => 'numeric',
+                        ),
+                        'IsAttachable' => array(
+                            'type' => 'boolean',
+                        ),
+                        'Description' => array(
+                            'type' => 'string',
+                        ),
+                        'CreateDate' => array(
+                            'type' => 'string',
+                        ),
+                        'UpdateDate' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'CreatePolicyVersionResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'PolicyVersion' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Document' => array(
+                            'type' => 'string',
+                        ),
+                        'VersionId' => array(
+                            'type' => 'string',
+                        ),
+                        'IsDefaultVersion' => array(
+                            'type' => 'boolean',
+                        ),
+                        'CreateDate' => array(
+                            'type' => 'string',
+                        ),
                     ),
                 ),
             ),
@@ -3110,6 +5520,16 @@ return array (
                 ),
             ),
         ),
+        'CreateSAMLProviderResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'SAMLProviderArn' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
         'CreateUserResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -3131,6 +5551,9 @@ return array (
                             'type' => 'string',
                         ),
                         'CreateDate' => array(
+                            'type' => 'string',
+                        ),
+                        'PasswordLastUsed' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -3172,12 +5595,369 @@ return array (
                                 'CreateDate' => array(
                                     'type' => 'string',
                                 ),
+                                'PasswordLastUsed' => array(
+                                    'type' => 'string',
+                                ),
                             ),
                         ),
                         'EnableDate' => array(
                             'type' => 'string',
                         ),
                     ),
+                ),
+            ),
+        ),
+        'GenerateCredentialReportResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'State' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'Description' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'GetAccessKeyLastUsedResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'UserName' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'AccessKeyLastUsed' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'LastUsedDate' => array(
+                            'type' => 'string',
+                        ),
+                        'ServiceName' => array(
+                            'type' => 'string',
+                        ),
+                        'Region' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'GetAccountAuthorizationDetailsResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'UserDetailList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'UserDetail',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'Path' => array(
+                                'type' => 'string',
+                            ),
+                            'UserName' => array(
+                                'type' => 'string',
+                            ),
+                            'UserId' => array(
+                                'type' => 'string',
+                            ),
+                            'Arn' => array(
+                                'type' => 'string',
+                            ),
+                            'CreateDate' => array(
+                                'type' => 'string',
+                            ),
+                            'UserPolicyList' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'PolicyDetail',
+                                    'type' => 'object',
+                                    'sentAs' => 'member',
+                                    'properties' => array(
+                                        'PolicyName' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'PolicyDocument' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            'GroupList' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'groupNameType',
+                                    'type' => 'string',
+                                    'sentAs' => 'member',
+                                ),
+                            ),
+                            'AttachedManagedPolicies' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'AttachedPolicy',
+                                    'type' => 'object',
+                                    'sentAs' => 'member',
+                                    'properties' => array(
+                                        'PolicyName' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'PolicyArn' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'GroupDetailList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'GroupDetail',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'Path' => array(
+                                'type' => 'string',
+                            ),
+                            'GroupName' => array(
+                                'type' => 'string',
+                            ),
+                            'GroupId' => array(
+                                'type' => 'string',
+                            ),
+                            'Arn' => array(
+                                'type' => 'string',
+                            ),
+                            'CreateDate' => array(
+                                'type' => 'string',
+                            ),
+                            'GroupPolicyList' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'PolicyDetail',
+                                    'type' => 'object',
+                                    'sentAs' => 'member',
+                                    'properties' => array(
+                                        'PolicyName' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'PolicyDocument' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            'AttachedManagedPolicies' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'AttachedPolicy',
+                                    'type' => 'object',
+                                    'sentAs' => 'member',
+                                    'properties' => array(
+                                        'PolicyName' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'PolicyArn' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'RoleDetailList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'RoleDetail',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'Path' => array(
+                                'type' => 'string',
+                            ),
+                            'RoleName' => array(
+                                'type' => 'string',
+                            ),
+                            'RoleId' => array(
+                                'type' => 'string',
+                            ),
+                            'Arn' => array(
+                                'type' => 'string',
+                            ),
+                            'CreateDate' => array(
+                                'type' => 'string',
+                            ),
+                            'AssumeRolePolicyDocument' => array(
+                                'type' => 'string',
+                            ),
+                            'InstanceProfileList' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'InstanceProfile',
+                                    'type' => 'object',
+                                    'sentAs' => 'member',
+                                    'properties' => array(
+                                        'Path' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'InstanceProfileName' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'InstanceProfileId' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'Arn' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'CreateDate' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'Roles' => array(
+                                            'type' => 'array',
+                                            'items' => array(
+                                                'name' => 'Role',
+                                                'type' => 'object',
+                                                'sentAs' => 'member',
+                                                'properties' => array(
+                                                    'Path' => array(
+                                                        'type' => 'string',
+                                                    ),
+                                                    'RoleName' => array(
+                                                        'type' => 'string',
+                                                    ),
+                                                    'RoleId' => array(
+                                                        'type' => 'string',
+                                                    ),
+                                                    'Arn' => array(
+                                                        'type' => 'string',
+                                                    ),
+                                                    'CreateDate' => array(
+                                                        'type' => 'string',
+                                                    ),
+                                                    'AssumeRolePolicyDocument' => array(
+                                                        'type' => 'string',
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            'RolePolicyList' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'PolicyDetail',
+                                    'type' => 'object',
+                                    'sentAs' => 'member',
+                                    'properties' => array(
+                                        'PolicyName' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'PolicyDocument' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            'AttachedManagedPolicies' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'AttachedPolicy',
+                                    'type' => 'object',
+                                    'sentAs' => 'member',
+                                    'properties' => array(
+                                        'PolicyName' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'PolicyArn' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'Policies' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'ManagedPolicyDetail',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'PolicyName' => array(
+                                'type' => 'string',
+                            ),
+                            'PolicyId' => array(
+                                'type' => 'string',
+                            ),
+                            'Arn' => array(
+                                'type' => 'string',
+                            ),
+                            'Path' => array(
+                                'type' => 'string',
+                            ),
+                            'DefaultVersionId' => array(
+                                'type' => 'string',
+                            ),
+                            'AttachmentCount' => array(
+                                'type' => 'numeric',
+                            ),
+                            'IsAttachable' => array(
+                                'type' => 'boolean',
+                            ),
+                            'Description' => array(
+                                'type' => 'string',
+                            ),
+                            'CreateDate' => array(
+                                'type' => 'string',
+                            ),
+                            'UpdateDate' => array(
+                                'type' => 'string',
+                            ),
+                            'PolicyVersionList' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'PolicyVersion',
+                                    'type' => 'object',
+                                    'sentAs' => 'member',
+                                    'properties' => array(
+                                        'Document' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'VersionId' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'IsDefaultVersion' => array(
+                                            'type' => 'boolean',
+                                        ),
+                                        'CreateDate' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
                 ),
             ),
         ),
@@ -3207,6 +5987,18 @@ return array (
                         'AllowUsersToChangePassword' => array(
                             'type' => 'boolean',
                         ),
+                        'ExpirePasswords' => array(
+                            'type' => 'boolean',
+                        ),
+                        'MaxPasswordAge' => array(
+                            'type' => 'numeric',
+                        ),
+                        'PasswordReusePrevention' => array(
+                            'type' => 'numeric',
+                        ),
+                        'HardExpiry' => array(
+                            'type' => 'boolean',
+                        ),
                     ),
                 ),
             ),
@@ -3234,6 +6026,17 @@ return array (
                             'MFADevices',
                             'MFADevicesInUse',
                             'AccountMFAEnabled',
+                            'AccountAccessKeysPresent',
+                            'AccountSigningCertificatesPresent',
+                            'AttachedPoliciesPerGroupQuota',
+                            'AttachedPoliciesPerRoleQuota',
+                            'AttachedPoliciesPerUserQuota',
+                            'Policies',
+                            'PoliciesQuota',
+                            'PolicySizeQuota',
+                            'PolicyVersionsInUse',
+                            'PolicyVersionsInUseQuota',
+                            'VersionsPerPolicyQuota',
                         ),
                     ),
                     'filters' => array(
@@ -3262,6 +6065,24 @@ return array (
                         ),
                     ),
                     'additionalProperties' => false,
+                ),
+            ),
+        ),
+        'GetCredentialReportResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Content' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'ReportFormat' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'GeneratedTime' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
                 ),
             ),
         ),
@@ -3311,6 +6132,9 @@ return array (
                                 'type' => 'string',
                             ),
                             'CreateDate' => array(
+                                'type' => 'string',
+                            ),
+                            'PasswordLastUsed' => array(
                                 'type' => 'string',
                             ),
                         ),
@@ -3413,6 +6237,107 @@ return array (
                         'CreateDate' => array(
                             'type' => 'string',
                         ),
+                        'PasswordResetRequired' => array(
+                            'type' => 'boolean',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'GetOpenIDConnectProviderResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Url' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'ClientIDList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'clientIDType',
+                        'type' => 'string',
+                        'sentAs' => 'member',
+                    ),
+                ),
+                'ThumbprintList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'thumbprintType',
+                        'type' => 'string',
+                        'sentAs' => 'member',
+                    ),
+                ),
+                'CreateDate' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'GetPolicyResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Policy' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'PolicyName' => array(
+                            'type' => 'string',
+                        ),
+                        'PolicyId' => array(
+                            'type' => 'string',
+                        ),
+                        'Arn' => array(
+                            'type' => 'string',
+                        ),
+                        'Path' => array(
+                            'type' => 'string',
+                        ),
+                        'DefaultVersionId' => array(
+                            'type' => 'string',
+                        ),
+                        'AttachmentCount' => array(
+                            'type' => 'numeric',
+                        ),
+                        'IsAttachable' => array(
+                            'type' => 'boolean',
+                        ),
+                        'Description' => array(
+                            'type' => 'string',
+                        ),
+                        'CreateDate' => array(
+                            'type' => 'string',
+                        ),
+                        'UpdateDate' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'GetPolicyVersionResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'PolicyVersion' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Document' => array(
+                            'type' => 'string',
+                        ),
+                        'VersionId' => array(
+                            'type' => 'string',
+                        ),
+                        'IsDefaultVersion' => array(
+                            'type' => 'boolean',
+                        ),
+                        'CreateDate' => array(
+                            'type' => 'string',
+                        ),
                     ),
                 ),
             ),
@@ -3465,6 +6390,54 @@ return array (
                 ),
             ),
         ),
+        'GetSAMLProviderResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'SAMLMetadataDocument' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'CreateDate' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'ValidUntil' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'GetSSHPublicKeyResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'SSHPublicKey' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'UserName' => array(
+                            'type' => 'string',
+                        ),
+                        'SSHPublicKeyId' => array(
+                            'type' => 'string',
+                        ),
+                        'Fingerprint' => array(
+                            'type' => 'string',
+                        ),
+                        'SSHPublicKeyBody' => array(
+                            'type' => 'string',
+                        ),
+                        'Status' => array(
+                            'type' => 'string',
+                        ),
+                        'UploadDate' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
         'GetServerCertificateResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -3489,6 +6462,9 @@ return array (
                                     'type' => 'string',
                                 ),
                                 'UploadDate' => array(
+                                    'type' => 'string',
+                                ),
+                                'Expiration' => array(
                                     'type' => 'string',
                                 ),
                             ),
@@ -3524,6 +6500,9 @@ return array (
                             'type' => 'string',
                         ),
                         'CreateDate' => array(
+                            'type' => 'string',
+                        ),
+                        'PasswordLastUsed' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -3596,6 +6575,155 @@ return array (
                         'name' => 'accountAliasType',
                         'type' => 'string',
                         'sentAs' => 'member',
+                    ),
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'ListAttachedGroupPoliciesResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'AttachedPolicies' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'AttachedPolicy',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'PolicyName' => array(
+                                'type' => 'string',
+                            ),
+                            'PolicyArn' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'ListAttachedRolePoliciesResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'AttachedPolicies' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'AttachedPolicy',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'PolicyName' => array(
+                                'type' => 'string',
+                            ),
+                            'PolicyArn' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'ListAttachedUserPoliciesResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'AttachedPolicies' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'AttachedPolicy',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'PolicyName' => array(
+                                'type' => 'string',
+                            ),
+                            'PolicyArn' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'ListEntitiesForPolicyResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'PolicyGroups' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'PolicyGroup',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'GroupName' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'PolicyUsers' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'PolicyUser',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'UserName' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'PolicyRoles' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'PolicyRole',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'RoleName' => array(
+                                'type' => 'string',
+                            ),
+                        ),
                     ),
                 ),
                 'IsTruncated' => array(
@@ -3881,6 +7009,118 @@ return array (
                 ),
             ),
         ),
+        'ListOpenIDConnectProvidersResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'OpenIDConnectProviderList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'OpenIDConnectProviderListEntry',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'Arn' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'ListPoliciesResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Policies' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'Policy',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'PolicyName' => array(
+                                'type' => 'string',
+                            ),
+                            'PolicyId' => array(
+                                'type' => 'string',
+                            ),
+                            'Arn' => array(
+                                'type' => 'string',
+                            ),
+                            'Path' => array(
+                                'type' => 'string',
+                            ),
+                            'DefaultVersionId' => array(
+                                'type' => 'string',
+                            ),
+                            'AttachmentCount' => array(
+                                'type' => 'numeric',
+                            ),
+                            'IsAttachable' => array(
+                                'type' => 'boolean',
+                            ),
+                            'Description' => array(
+                                'type' => 'string',
+                            ),
+                            'CreateDate' => array(
+                                'type' => 'string',
+                            ),
+                            'UpdateDate' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'ListPolicyVersionsResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Versions' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'PolicyVersion',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'Document' => array(
+                                'type' => 'string',
+                            ),
+                            'VersionId' => array(
+                                'type' => 'string',
+                            ),
+                            'IsDefaultVersion' => array(
+                                'type' => 'boolean',
+                            ),
+                            'CreateDate' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
         'ListRolePoliciesResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -3947,6 +7187,69 @@ return array (
                 ),
             ),
         ),
+        'ListSAMLProvidersResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'SAMLProviderList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'SAMLProviderListEntry',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'Arn' => array(
+                                'type' => 'string',
+                            ),
+                            'ValidUntil' => array(
+                                'type' => 'string',
+                            ),
+                            'CreateDate' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'ListSSHPublicKeysResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'SSHPublicKeys' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'SSHPublicKeyMetadata',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'UserName' => array(
+                                'type' => 'string',
+                            ),
+                            'SSHPublicKeyId' => array(
+                                'type' => 'string',
+                            ),
+                            'Status' => array(
+                                'type' => 'string',
+                            ),
+                            'UploadDate' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
         'ListServerCertificatesResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -3972,6 +7275,9 @@ return array (
                                 'type' => 'string',
                             ),
                             'UploadDate' => array(
+                                'type' => 'string',
+                            ),
+                            'Expiration' => array(
                                 'type' => 'string',
                             ),
                         ),
@@ -4077,6 +7383,9 @@ return array (
                             'CreateDate' => array(
                                 'type' => 'string',
                             ),
+                            'PasswordLastUsed' => array(
+                                'type' => 'string',
+                            ),
                         ),
                     ),
                 ),
@@ -4129,6 +7438,9 @@ return array (
                                     'CreateDate' => array(
                                         'type' => 'string',
                                     ),
+                                    'PasswordLastUsed' => array(
+                                        'type' => 'string',
+                                    ),
                                 ),
                             ),
                             'EnableDate' => array(
@@ -4144,6 +7456,46 @@ return array (
                 'Marker' => array(
                     'type' => 'string',
                     'location' => 'xml',
+                ),
+            ),
+        ),
+        'UpdateSAMLProviderResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'SAMLProviderArn' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'UploadSSHPublicKeyResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'SSHPublicKey' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'UserName' => array(
+                            'type' => 'string',
+                        ),
+                        'SSHPublicKeyId' => array(
+                            'type' => 'string',
+                        ),
+                        'Fingerprint' => array(
+                            'type' => 'string',
+                        ),
+                        'SSHPublicKeyBody' => array(
+                            'type' => 'string',
+                        ),
+                        'Status' => array(
+                            'type' => 'string',
+                        ),
+                        'UploadDate' => array(
+                            'type' => 'string',
+                        ),
+                    ),
                 ),
             ),
         ),
@@ -4168,6 +7520,9 @@ return array (
                             'type' => 'string',
                         ),
                         'UploadDate' => array(
+                            'type' => 'string',
+                        ),
+                        'Expiration' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -4203,119 +7558,165 @@ return array (
         ),
     ),
     'iterators' => array(
-        'operations' => array(
-            'GetGroup' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'Users',
+        'GetGroup' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'Users',
+        ),
+        'ListAccessKeys' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'AccessKeyMetadata',
+        ),
+        'ListAccountAliases' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'AccountAliases',
+        ),
+        'ListAttachedGroupPolicies' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'AttachedPolicies',
+        ),
+        'ListAttachedRolePolicies' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'AttachedPolicies',
+        ),
+        'ListAttachedUserPolicies' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'AttachedPolicies',
+        ),
+        'ListEntitiesForPolicy' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => array(
+                'PolicyGroups',
+                'PolicyUsers',
+                'PolicyRoles',
             ),
-            'ListAccessKeys' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'AccessKeyMetadata',
-            ),
-            'ListAccountAliases' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'AccountAliases',
-            ),
-            'ListGroupPolicies' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'PolicyNames',
-            ),
-            'ListGroups' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'Groups',
-            ),
-            'ListGroupsForUser' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'Groups',
-            ),
-            'ListInstanceProfiles' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'InstanceProfiles',
-            ),
-            'ListInstanceProfilesForRole' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'InstanceProfiles',
-            ),
-            'ListMFADevices' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'MFADevices',
-            ),
-            'ListRolePolicies' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'PolicyNames',
-            ),
-            'ListRoles' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'Roles',
-            ),
-            'ListServerCertificates' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'ServerCertificateMetadataList',
-            ),
-            'ListSigningCertificates' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'Certificates',
-            ),
-            'ListUserPolicies' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'PolicyNames',
-            ),
-            'ListUsers' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'Users',
-            ),
-            'ListVirtualMFADevices' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'more_key' => 'IsTruncated',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'VirtualMFADevices',
-            ),
+        ),
+        'ListGroupPolicies' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'PolicyNames',
+        ),
+        'ListGroups' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'Groups',
+        ),
+        'ListGroupsForUser' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'Groups',
+        ),
+        'ListInstanceProfiles' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'InstanceProfiles',
+        ),
+        'ListInstanceProfilesForRole' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'InstanceProfiles',
+        ),
+        'ListMFADevices' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'MFADevices',
+        ),
+        'ListPolicies' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'Policies',
+        ),
+        'ListRolePolicies' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'PolicyNames',
+        ),
+        'ListRoles' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'Roles',
+        ),
+        'ListSAMLProviders' => array(
+            'result_key' => 'SAMLProviderList',
+        ),
+        'ListServerCertificates' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'ServerCertificateMetadataList',
+        ),
+        'ListSigningCertificates' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'Certificates',
+        ),
+        'ListUserPolicies' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'PolicyNames',
+        ),
+        'ListUsers' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'Users',
+        ),
+        'ListVirtualMFADevices' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'VirtualMFADevices',
+        ),
+        'GetAccountAuthorizationDetails' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
         ),
     ),
 );

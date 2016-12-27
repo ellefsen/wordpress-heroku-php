@@ -2,13 +2,16 @@
 /*
 Plugin Name: Amazon Web Services
 Plugin URI: http://wordpress.org/extend/plugins/amazon-web-services/
-Description: Includes the Amazon Web Services PHP libraries, stores access keys, and allows other plugins to hook into it
-Author: Brad Touesnard
-Version: 0.1
-Author URI: http://bradt.ca/
+Description: Includes the Amazon Web Services PHP libraries, stores access keys, and allows other plugins to hook into it.
+Author: Delicious Brains
+Version: 1.0.1
+Author URI: http://deliciousbrains.com/
+Network: True
+Text Domain: amazon-web-services
+Domain Path: /languages/
 */
 
-// Copyright (c) 2013 Brad Touesnard. All rights reserved.
+// Copyright (c) 2013 Delicious Brains. All rights reserved.
 //
 // Released under the GPL license
 // http://www.opensource.org/licenses/gpl-license.php
@@ -19,55 +22,65 @@ Author URI: http://bradt.ca/
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 // **********************************************************************
 
-function amazon_web_services_incompatibile( $msg ) {
-	require_once ABSPATH . '/wp-admin/includes/plugin.php';
-	deactivate_plugins( __FILE__ );
-    wp_die( $msg );
+$GLOBALS['aws_meta']['amazon-web-services']['version'] = '1.0.1';
+
+$GLOBALS['aws_meta']['amazon-web-services']['supported_addon_versions'] = array(
+	'amazon-s3-and-cloudfront'     => '0.9',
+	'amazon-s3-and-cloudfront-pro' => '1.0b1',
+);
+
+require dirname( __FILE__ ) . '/classes/aws-compatibility-check.php';
+global $aws_compat_check;
+$aws_compat_check = new AWS_Compatibility_Check( __FILE__ );
+
+if ( $aws_compat_check->is_compatible() ) {
+	add_action( 'init', 'amazon_web_services_init' );
 }
 
-if ( is_admin() && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
-	if ( version_compare( PHP_VERSION, '5.3.3', '<' ) ) {
-		amazon_web_services_incompatibile( __( 'The official Amazon Web Services SDK requires PHP 5.3.3 or higher. The plugin has now disabled itself.', 'amazon-web-services' ) );
-	}
-	elseif ( !function_exists( 'curl_version' ) 
-		|| !( $curl = curl_version() ) || empty( $curl['version'] ) || empty( $curl['features'] )
-		|| version_compare( $curl['version'], '7.16.2', '<' ) )
-	{
-		amazon_web_services_incompatibile( __( 'The official Amazon Web Services SDK requires cURL 7.16.2+. The plugin has now disabled itself.', 'amazon-web-services' ) );
-	}
-	elseif ( !( $curl['features'] & CURL_VERSION_SSL ) ) {
-		amazon_web_services_incompatibile( __( 'The official Amazon Web Services SDK requires that cURL is compiled with OpenSSL. The plugin has now disabled itself.', 'amazon-web-services' ) );
-	}
-	elseif ( !( $curl['features'] & CURL_VERSION_LIBZ ) ) {
-		amazon_web_services_incompatibile( __( 'The official Amazon Web Services SDK requires that cURL is compiled with zlib. The plugin has now disabled itself.', 'amazon-web-services' ) );
-	}
+/**
+ * Fire up the plugin if compatibility checks have been met
+ */
+function amazon_web_services_require_files() {
+	$abspath = dirname( __FILE__ );
+	require_once $abspath . '/classes/aws-plugin-base.php';
+	require_once $abspath . '/classes/amazon-web-services.php';
+	require_once $abspath . '/vendor/aws/aws-autoloader.php';
 }
-
-require_once 'classes/aws-plugin-base.php';
-require_once 'classes/amazon-web-services.php';
-require_once 'vendor/aws/aws-autoloader.php';
 
 function amazon_web_services_init() {
-    global $amazon_web_services;
-    $amazon_web_services = new Amazon_Web_Services( __FILE__ );
+	amazon_web_services_require_files();
+	global $amazon_web_services;
+	$amazon_web_services = new Amazon_Web_Services( __FILE__ );
 }
 
-add_action( 'init', 'amazon_web_services_init' );
-
+/**
+ * On activation check the plugin meets compatibility checks
+ * and migrate any legacy settings over to the new option
+ *
+ */
 function amazon_web_services_activation() {
+	global $aws_compat_check;
+	if ( ! $aws_compat_check->is_compatible() ) {
+		$error_msg = $aws_compat_check->get_error_msg();
+		include dirname( __FILE__ ) . '/view/activation-error.php';
+		die();
+	}
+
 	// Migrate keys over from old Amazon S3 and CloudFront plugin settings
-	if ( !( $as3cf = get_option( 'tantan_wordpress_s3' ) ) ) {
+	if ( ! ( $as3cf = get_option( 'tantan_wordpress_s3' ) ) ) {
 		return;
 	}
 
-	if ( !isset( $as3cf['key'] ) || !isset( $as3cf['secret'] ) ) {
+	if ( ! isset( $as3cf['key'] ) || ! isset( $as3cf['secret'] ) ) {
 		return;
 	}
 
-	if ( !get_site_option( Amazon_Web_Services::SETTINGS_KEY ) ) {
+	amazon_web_services_require_files();
+
+	if ( ! get_site_option( Amazon_Web_Services::SETTINGS_KEY ) ) {
 		add_site_option( Amazon_Web_Services::SETTINGS_KEY, array(
-			'access_key_id' => $as3cf['key'],
-			'secret_access_key' => $as3cf['secret']
+			'access_key_id'     => $as3cf['key'],
+			'secret_access_key' => $as3cf['secret'],
 		) );
 	}
 
@@ -76,4 +89,5 @@ function amazon_web_services_activation() {
 
 	update_option( 'tantan_wordpress_s3', $as3cf );
 }
+
 register_activation_hook( __FILE__, 'amazon_web_services_activation' );

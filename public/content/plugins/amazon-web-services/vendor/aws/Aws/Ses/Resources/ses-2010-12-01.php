@@ -29,6 +29,16 @@ return array (
             'https' => true,
             'hostname' => 'email.us-east-1.amazonaws.com',
         ),
+        'us-west-2' => array(
+            'http' => false,
+            'https' => true,
+            'hostname' => 'email.us-west-2.amazonaws.com',
+        ),
+        'eu-west-1' => array(
+            'http' => false,
+            'https' => true,
+            'hostname' => 'email.eu-west-1.amazonaws.com',
+        ),
     ),
     'operations' => array(
         'DeleteIdentity' => array(
@@ -52,6 +62,37 @@ return array (
                     'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
+                ),
+            ),
+        ),
+        'DeleteIdentityPolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DeleteIdentityPolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-12-01',
+                ),
+                'Identity' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'PolicyName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
                 ),
             ),
         ),
@@ -134,6 +175,42 @@ return array (
                     'items' => array(
                         'name' => 'Identity',
                         'type' => 'string',
+                    ),
+                ),
+            ),
+        ),
+        'GetIdentityPolicies' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetIdentityPoliciesResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetIdentityPolicies',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-12-01',
+                ),
+                'Identity' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'PolicyNames' => array(
+                    'required' => true,
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'PolicyNames.member',
+                    'items' => array(
+                        'name' => 'PolicyName',
+                        'type' => 'string',
+                        'minLength' => 1,
+                        'maxLength' => 64,
                     ),
                 ),
             ),
@@ -225,10 +302,6 @@ return array (
                 'IdentityType' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
-                    'enum' => array(
-                        'EmailAddress',
-                        'Domain',
-                    ),
                 ),
                 'NextToken' => array(
                     'type' => 'string',
@@ -236,6 +309,30 @@ return array (
                 ),
                 'MaxItems' => array(
                     'type' => 'numeric',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
+        'ListIdentityPolicies' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListIdentityPoliciesResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListIdentityPolicies',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-12-01',
+                ),
+                'Identity' => array(
+                    'required' => true,
+                    'type' => 'string',
                     'location' => 'aws.query',
                 ),
             ),
@@ -257,6 +354,49 @@ return array (
                     'static' => true,
                     'location' => 'aws.query',
                     'default' => '2010-12-01',
+                ),
+            ),
+        ),
+        'PutIdentityPolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'PutIdentityPolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-12-01',
+                ),
+                'Identity' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'PolicyName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'Policy' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Indicates that the provided policy is invalid. Check the error stack for more information about what caused the error.',
+                    'class' => 'InvalidPolicyException',
                 ),
             ),
         ),
@@ -376,6 +516,14 @@ return array (
                     'type' => 'string',
                     'location' => 'aws.query',
                 ),
+                'SourceArn' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'ReturnPathArn' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
             ),
             'errorResponses' => array(
                 array(
@@ -424,6 +572,18 @@ return array (
                             'type' => 'string',
                         ),
                     ),
+                ),
+                'FromArn' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'SourceArn' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'ReturnPathArn' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
                 ),
             ),
             'errorResponses' => array(
@@ -519,10 +679,6 @@ return array (
                     'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
-                    'enum' => array(
-                        'Bounce',
-                        'Complaint',
-                    ),
                 ),
                 'SnsTopic' => array(
                     'type' => 'string',
@@ -721,10 +877,49 @@ return array (
                                     'ComplaintTopic' => array(
                                         'type' => 'string',
                                     ),
+                                    'DeliveryTopic' => array(
+                                        'type' => 'string',
+                                    ),
                                     'ForwardingEnabled' => array(
                                         'type' => 'boolean',
                                     ),
                                 ),
+                            ),
+                        ),
+                    ),
+                    'additionalProperties' => false,
+                ),
+            ),
+        ),
+        'GetIdentityPoliciesResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Policies' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'filters' => array(
+                        array(
+                            'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                            'args' => array(
+                                '@value',
+                                'entry',
+                                'key',
+                                'value',
+                            ),
+                        ),
+                    ),
+                    'items' => array(
+                        'name' => 'entry',
+                        'type' => 'object',
+                        'sentAs' => 'entry',
+                        'additionalProperties' => true,
+                        'properties' => array(
+                            'key' => array(
+                                'type' => 'string',
+                            ),
+                            'value' => array(
+                                'type' => 'string',
                             ),
                         ),
                     ),
@@ -845,6 +1040,21 @@ return array (
                 ),
             ),
         ),
+        'ListIdentityPoliciesResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'PolicyNames' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'PolicyName',
+                        'type' => 'string',
+                        'sentAs' => 'member',
+                    ),
+                ),
+            ),
+        ),
         'ListVerifiedEmailAddressesResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -907,16 +1117,14 @@ return array (
         ),
     ),
     'iterators' => array(
-        'operations' => array(
-            'ListIdentities' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'limit_key' => 'MaxItems',
-                'result_key' => 'Identities',
-            ),
-            'ListVerifiedEmailAddresses' => array(
-                'result_key' => 'VerifiedEmailAddresses',
-            ),
+        'ListIdentities' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'Identities',
+        ),
+        'ListVerifiedEmailAddresses' => array(
+            'result_key' => 'VerifiedEmailAddresses',
         ),
     ),
     'waiters' => array(

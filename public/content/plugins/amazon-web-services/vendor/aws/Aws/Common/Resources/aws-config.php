@@ -47,10 +47,35 @@ return array(
             )
         ),
 
+        'cloudhsm' => array(
+            'alias'   => 'CloudHsm',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\CloudHsm\CloudHsmClient'
+        ),
+
         'cloudsearch' => array(
             'alias'   => 'CloudSearch',
             'extends' => 'default_settings',
             'class'   => 'Aws\CloudSearch\CloudSearchClient'
+        ),
+
+        'cloudsearch_20110201' => array(
+            'extends' => 'cloudsearch',
+            'params' => array(
+                'version' => '2011-02-01'
+            )
+        ),
+
+        'cloudsearchdomain' => array(
+            'alias'   => 'CloudSearchDomain',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\CloudSearchDomain\CloudSearchDomainClient'
+        ),
+
+        'cloudtrail' => array(
+            'alias'   => 'CloudTrail',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\CloudTrail\CloudTrailClient'
         ),
 
         'cloudwatch' => array(
@@ -59,16 +84,74 @@ return array(
             'class'   => 'Aws\CloudWatch\CloudWatchClient'
         ),
 
+        'cloudwatchlogs' => array(
+            'alias'   => 'CloudWatchLogs',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\CloudWatchLogs\CloudWatchLogsClient'
+        ),
+
+        'cognito-identity' => array(
+            'alias'   => 'CognitoIdentity',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\CognitoIdentity\CognitoIdentityClient'
+        ),
+
+        'cognitoidentity' => array('extends' => 'cognito-identity'),
+
+        'cognito-sync' => array(
+            'alias'   => 'CognitoSync',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\CognitoSync\CognitoSyncClient'
+        ),
+
+        'cognitosync' => array('extends' => 'cognito-sync'),
+
+        'codecommit' => array(
+            'alias'   => 'CodeCommit',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\CodeCommit\CodeCommitClient'
+        ),
+
+        'codedeploy' => array(
+            'alias'   => 'CodeDeploy',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\CodeDeploy\CodeDeployClient'
+        ),
+
+        'codepipeline' => array(
+            'alias'   => 'CodePipeline',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\CodePipeline\CodePipelineClient'
+        ),
+
+        'config' => array(
+            'alias'   => 'ConfigService',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\ConfigService\ConfigServiceClient'
+        ),
+
         'datapipeline' => array(
             'alias'   => 'DataPipeline',
             'extends' => 'default_settings',
             'class'   => 'Aws\DataPipeline\DataPipelineClient'
         ),
 
+        'devicefarm' => array(
+            'alias'   => 'DeviceFarm',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\DeviceFarm\DeviceFarmClient'
+        ),
+
         'directconnect' => array(
             'alias'   => 'DirectConnect',
             'extends' => 'default_settings',
             'class'   => 'Aws\DirectConnect\DirectConnectClient'
+        ),
+
+        'ds' => array(
+            'alias'   => 'DirectoryService',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\DirectoryService\DirectoryServiceClient'
         ),
 
         'dynamodb' => array(
@@ -84,10 +167,22 @@ return array(
             )
         ),
 
+        'dynamodbstreams' => array(
+            'alias'   => 'DynamoDbStreams',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\DynamoDbStreams\DynamoDbStreamsClient'
+        ),
+
         'ec2' => array(
             'alias'   => 'Ec2',
             'extends' => 'default_settings',
             'class'   => 'Aws\Ec2\Ec2Client'
+        ),
+
+        'ecs' => array(
+            'alias'   => 'Ecs',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\Ecs\EcsClient'
         ),
 
         'elasticache' => array(
@@ -100,6 +195,12 @@ return array(
             'alias'   => 'ElasticBeanstalk',
             'extends' => 'default_settings',
             'class'   => 'Aws\ElasticBeanstalk\ElasticBeanstalkClient'
+        ),
+
+        'efs' => array(
+            'alias'   => 'Efs',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\Efs\EfsClient'
         ),
 
         'elasticloadbalancing' => array(
@@ -126,6 +227,24 @@ return array(
             'class'   => 'Aws\Glacier\GlacierClient'
         ),
 
+        'kinesis' => array(
+            'alias'   => 'Kinesis',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\Kinesis\KinesisClient'
+        ),
+
+        'kms' => array(
+            'alias'   => 'Kms',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\Kms\KmsClient'
+        ),
+
+        'lambda' => array(
+            'alias'   => 'Lambda',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\Lambda\LambdaClient'
+        ),
+
         'iam' => array(
             'alias'   => 'Iam',
             'extends' => 'default_settings',
@@ -136,6 +255,12 @@ return array(
             'alias'   => 'ImportExport',
             'extends' => 'default_settings',
             'class'   => 'Aws\ImportExport\ImportExportClient'
+        ),
+
+        'machinelearning' => array(
+            'alias'   => 'MachineLearning',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\MachineLearning\MachineLearningClient'
         ),
 
         'opsworks' => array(
@@ -160,6 +285,12 @@ return array(
             'alias'   => 'Route53',
             'extends' => 'default_settings',
             'class'   => 'Aws\Route53\Route53Client'
+        ),
+
+        'route53domains' => array(
+            'alias'   => 'Route53Domains',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\Route53Domains\Route53DomainsClient'
         ),
 
         's3' => array(
@@ -192,6 +323,12 @@ return array(
             'class'   => 'Aws\Sqs\SqsClient'
         ),
 
+        'ssm' => array(
+            'alias'   => 'Ssm',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\Ssm\SsmClient'
+        ),
+
         'storagegateway' => array(
             'alias'   => 'StorageGateway',
             'extends' => 'default_settings',
@@ -214,6 +351,12 @@ return array(
             'alias'   => 'Swf',
             'extends' => 'default_settings',
             'class'   => 'Aws\Swf\SwfClient'
+        ),
+
+        'workspaces' => array(
+            'alias'   => 'WorkSpaces',
+            'extends' => 'default_settings',
+            'class'   => 'Aws\WorkSpaces\WorkSpacesClient'
         ),
     )
 );

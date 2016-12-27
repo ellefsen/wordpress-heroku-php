@@ -20,7 +20,7 @@ return array (
     'serviceFullName' => 'Amazon CloudSearch',
     'serviceType' => 'query',
     'resultWrapped' => true,
-    'signatureVersion' => 'v2',
+    'signatureVersion' => 'v4',
     'namespace' => 'CloudSearch',
     'regions' => array(
         'us-east-1' => array(
@@ -85,10 +85,6 @@ return array (
                     'class' => 'InternalException',
                 ),
                 array(
-                    'reason' => 'An internal error occurred while processing the request. If this problem persists, report an issue from the Service Health Dashboard.',
-                    'class' => 'InternalException',
-                ),
-                array(
                     'reason' => 'The request was rejected because a resource limit has already been met.',
                     'class' => 'LimitExceededException',
                 ),
@@ -132,11 +128,6 @@ return array (
                         'IndexFieldType' => array(
                             'required' => true,
                             'type' => 'string',
-                            'enum' => array(
-                                'uint',
-                                'literal',
-                                'text',
-                            ),
                         ),
                         'UIntOptions' => array(
                             'type' => 'object',
@@ -199,11 +190,6 @@ return array (
                                     'SourceDataFunction' => array(
                                         'required' => true,
                                         'type' => 'string',
-                                        'enum' => array(
-                                            'Copy',
-                                            'TrimTitle',
-                                            'Map',
-                                        ),
                                     ),
                                     'SourceDataCopy' => array(
                                         'type' => 'object',
@@ -256,6 +242,7 @@ return array (
                                             ),
                                             'Cases' => array(
                                                 'type' => 'object',
+                                                'sentAs' => 'Cases.entry',
                                                 'additionalProperties' => array(
                                                     'type' => 'string',
                                                     'maxLength' => 1024,
@@ -2346,16 +2333,14 @@ return array (
         ),
     ),
     'iterators' => array(
-        'operations' => array(
-            'DescribeDomains' => array(
-                'result_key' => 'DomainStatusList',
-            ),
-            'DescribeIndexFields' => array(
-                'result_key' => 'IndexFields',
-            ),
-            'DescribeRankExpressions' => array(
-                'result_key' => 'RankExpressions',
-            ),
+        'DescribeDomains' => array(
+            'result_key' => 'DomainStatusList',
+        ),
+        'DescribeIndexFields' => array(
+            'result_key' => 'IndexFields',
+        ),
+        'DescribeRankExpressions' => array(
+            'result_key' => 'RankExpressions',
         ),
     ),
 );

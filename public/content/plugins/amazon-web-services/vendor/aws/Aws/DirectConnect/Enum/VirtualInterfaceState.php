@@ -23,9 +23,11 @@ use Aws\Common\Enum;
  */
 class VirtualInterfaceState extends Enum
 {
+    const CONFIRMING = 'confirming';
     const VERIFYING = 'verifying';
     const PENDING = 'pending';
     const AVAILABLE = 'available';
     const DELETING = 'deleting';
     const DELETED = 'deleted';
+    const REJECTED = 'rejected';
 }

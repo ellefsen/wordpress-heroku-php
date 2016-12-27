@@ -17,6 +17,6 @@
 namespace Aws\ElastiCache\Exception;
 
 /**
- * User already has a reservation with the given identifier.
+ * You already have a reservation with the given identifier.
  */
 class ReservedCacheNodeAlreadyExistsException extends ElastiCacheException {}
