@@ -17,6 +17,6 @@
 namespace Aws\Rds\Exception;
 
 /**
- * Request subnet is valid, or all subnets are not in common Vpc.
+ * The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC.
  */
 class InvalidSubnetException extends RdsException {}

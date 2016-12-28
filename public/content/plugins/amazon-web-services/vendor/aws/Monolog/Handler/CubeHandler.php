@@ -31,9 +31,9 @@ class CubeHandler extends AbstractProcessingHandler
     /**
      * Create a Cube handler
      *
-     * @throws UnexpectedValueException when given url is not a valid url.
-     * A valid url must consists of three parts : protocol://host:port
-     * Only valid protocol used by Cube are http and udp
+     * @throws \UnexpectedValueException when given url is not a valid url.
+     *                                  A valid url must consists of three parts : protocol://host:port
+     *                                  Only valid protocol used by Cube are http and udp
      */
     public function __construct($url, $level = Logger::DEBUG, $bubble = true)
     {
@@ -59,12 +59,12 @@ class CubeHandler extends AbstractProcessingHandler
     /**
      * Establish a connection to an UDP socket
      *
-     * @throws LogicException when unable to connect to the socket
+     * @throws \LogicException when unable to connect to the socket
      */
     protected function connectUdp()
     {
         if (!extension_loaded('sockets')) {
-            throw new \LogicException('The sockets extension is needed to use udp URLs with the CubeHandler');
+            throw new MissingExtensionException('The sockets extension is required to use udp URLs with the CubeHandler');
         }
 
         $this->udpConnection = socket_create(AF_INET, SOCK_DGRAM, 0);
@@ -103,7 +103,7 @@ class CubeHandler extends AbstractProcessingHandler
     {
         $date = $record['datetime'];
 
-        $data = array('time' => $date->format('Y-m-d\TH:i:s.u'));
+        $data = array('time' => $date->format('Y-m-d\TH:i:s.uO'));
         unset($record['datetime']);
 
         if (isset($record['context']['type'])) {
@@ -116,7 +116,11 @@ class CubeHandler extends AbstractProcessingHandler
         $data['data'] = $record['context'];
         $data['data']['level'] = $record['level'];
 
-        $this->{'write'.$this->scheme}(json_encode($data));
+        if ($this->scheme === 'http') {
+            $this->writeHttp(json_encode($data));
+        } else {
+            $this->writeUdp(json_encode($data));
+        }
     }
 
     private function writeUdp($data)
@@ -140,6 +144,6 @@ class CubeHandler extends AbstractProcessingHandler
                 'Content-Length: ' . strlen('['.$data.']'))
         );
 
-        return curl_exec($this->httpConnection);
+        Curl\Util::execute($ch, 5, false);
     }
 }

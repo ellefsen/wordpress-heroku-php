@@ -51,20 +51,20 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method Model updateCloudFrontOriginAccessIdentity(array $args = array()) {@command CloudFront UpdateCloudFrontOriginAccessIdentity}
  * @method Model updateDistribution(array $args = array()) {@command CloudFront UpdateDistribution}
  * @method Model updateStreamingDistribution(array $args = array()) {@command CloudFront UpdateStreamingDistribution}
- * @method waitUntilStreamingDistributionDeployed(array $input) Wait until a streaming distribution is deployed. The input array uses the parameters of the GetStreamingDistribution operation and waiter specific settings
- * @method waitUntilDistributionDeployed(array $input) Wait until a distribution is deployed. The input array uses the parameters of the GetDistribution operation and waiter specific settings
- * @method waitUntilInvalidationCompleted(array $input) Wait until an invalidation has completed. The input array uses the parameters of the GetInvalidation operation and waiter specific settings
+ * @method waitUntilStreamingDistributionDeployed(array $input) The input array uses the parameters of the GetStreamingDistribution operation and waiter specific settings
+ * @method waitUntilDistributionDeployed(array $input) The input array uses the parameters of the GetDistribution operation and waiter specific settings
+ * @method waitUntilInvalidationCompleted(array $input) The input array uses the parameters of the GetInvalidation operation and waiter specific settings
  * @method ResourceIteratorInterface getListCloudFrontOriginAccessIdentitiesIterator(array $args = array()) The input array uses the parameters of the ListCloudFrontOriginAccessIdentities operation
  * @method ResourceIteratorInterface getListDistributionsIterator(array $args = array()) The input array uses the parameters of the ListDistributions operation
  * @method ResourceIteratorInterface getListInvalidationsIterator(array $args = array()) The input array uses the parameters of the ListInvalidations operation
  * @method ResourceIteratorInterface getListStreamingDistributionsIterator(array $args = array()) The input array uses the parameters of the ListStreamingDistributions operation
  *
- * @link http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/service-cloudfront.html User guide
- * @link http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.CloudFront.CloudFrontClient.html API docs
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/service-cloudfront.html User guide
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Aws.CloudFront.CloudFrontClient.html API docs
  */
 class CloudFrontClient extends AbstractClient
 {
-    const LATEST_API_VERSION = '2013-05-12';
+    const LATEST_API_VERSION = '2015-04-17';
 
     /**
      * Factory method to create a new Amazon CloudFront client using an array of configuration options.
@@ -76,7 +76,7 @@ class CloudFrontClient extends AbstractClient
      * @param array|Collection $config Client configuration data
      *
      * @return self
-     * @see \Aws\Common\Client\DefaultClient for a list of other available configuration options
+     * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/configuration.html#client-configuration-options
      */
     public static function factory($config = array())
     {
@@ -93,18 +93,6 @@ class CloudFrontClient extends AbstractClient
                 Options::SERVICE_DESCRIPTION => __DIR__ . '/Resources/cloudfront-%s.php',
             ))
             ->setExceptionParser(new DefaultXmlExceptionParser())
-            ->setIteratorsConfig(array(
-                'token_param' => 'Marker',
-                'token_key'   => 'NextMarker',
-                'more_key'    => 'IsTruncated',
-                'result_key'  => 'Items',
-                'operations'  => array(
-                    'ListCloudFrontOriginAccessIdentities',
-                    'ListDistributions',
-                    'ListInvalidations',
-                    'ListStreamingDistributions'
-                )
-            ))
             ->build();
     }
 
@@ -173,7 +161,6 @@ class CloudFrontClient extends AbstractClient
         $signedPolicy = strtr(base64_encode($signedPolicy), '+=/', '-_~');
 
         $url->getQuery()
-            ->useUrlEncoding(false)
             ->set('Signature', $signedPolicy)
             ->set('Key-Pair-Id', $options['key_pair_id']);
 
@@ -182,6 +169,7 @@ class CloudFrontClient extends AbstractClient
             return (string) $url;
         } else {
             // Use a relative URL when creating Flash player URLs
+            $url->getQuery()->useUrlEncoding(false);
             $url->setScheme(null)->setHost(null);
             return substr($url, 1);
         }
@@ -225,9 +213,14 @@ class CloudFrontClient extends AbstractClient
         } elseif ($scheme == 'rtmp') {
             $parts = parse_url($url);
             $pathParts = pathinfo($parts['path']);
-            // Add path leading to file, strip file extension, and add a query string if present
-            $resource = ltrim($pathParts['dirname'] . '/' . $pathParts['basename'], '/')
-                . (isset($parts['query']) ? "?{$parts['query']}" : '');
+            // Add path leading to file, strip file extension, and add a query
+            // string if present.
+            $resource = ltrim($pathParts['dirname']
+                . '/'
+                . $pathParts['basename'], '/\\');
+            if (isset($parts['query'])) {
+                $resource .= "?{$parts['query']}";
+            }
         } else {
             throw new InvalidArgumentException("Invalid URI scheme: {$scheme}. Must be one of http or rtmp.");
         }

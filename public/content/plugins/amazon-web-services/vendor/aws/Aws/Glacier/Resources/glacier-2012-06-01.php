@@ -42,10 +42,20 @@ return array (
             'https' => true,
             'hostname' => 'glacier.eu-west-1.amazonaws.com',
         ),
+        'ap-southeast-2' => array(
+            'http' => true,
+            'https' => true,
+            'hostname' => 'glacier.ap-southeast-2.amazonaws.com',
+        ),
         'ap-northeast-1' => array(
             'http' => true,
             'https' => true,
             'hostname' => 'glacier.ap-northeast-1.amazonaws.com',
+        ),
+        'cn-north-1' => array(
+            'http' => true,
+            'https' => true,
+            'hostname' => 'glacier.cn-north-1.amazonaws.com.cn',
         ),
     ),
     'operations' => array(
@@ -91,6 +101,94 @@ return array (
                 ),
             ),
         ),
+        'AbortVaultLock' => array(
+            'httpMethod' => 'DELETE',
+            'uri' => '/{accountId}/vaults/{vaultName}/lock-policy',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'vaultName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
+                    'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
+        'AddTagsToVault' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/{accountId}/vaults/{vaultName}/tags?operation=add',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'vaultName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'Tags' => array(
+                    'type' => 'object',
+                    'location' => 'json',
+                    'additionalProperties' => array(
+                        'type' => 'string',
+                        'data' => array(
+                            'shape_name' => 'TagKey',
+                        ),
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
+                    'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if the request results in a vault or account limit being exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
         'CompleteMultipartUpload' => array(
             'httpMethod' => 'POST',
             'uri' => '/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}',
@@ -122,6 +220,48 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-sha256-tree-hash',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
+                    'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
+        'CompleteVaultLock' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/{accountId}/vaults/{vaultName}/lock-policy/{lockId}',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'vaultName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'lockId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
                 ),
             ),
             'errorResponses' => array(
@@ -225,6 +365,43 @@ return array (
         'DeleteVault' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/{accountId}/vaults/{vaultName}',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'vaultName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
+                    'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
+        'DeleteVaultAccessPolicy' => array(
+            'httpMethod' => 'DELETE',
+            'uri' => '/{accountId}/vaults/{vaultName}/access-policy',
             'class' => 'Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
@@ -375,6 +552,34 @@ return array (
                 ),
             ),
         ),
+        'GetDataRetrievalPolicy' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/{accountId}/policies/data-retrieval',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'GetDataRetrievalPolicyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
         'GetJobOutput' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/vaults/{vaultName}/jobs/{jobId}/output',
@@ -404,6 +609,80 @@ return array (
                 ),
                 'saveAs' => array(
                     'location' => 'response_body',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
+                    'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
+        'GetVaultAccessPolicy' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/{accountId}/vaults/{vaultName}/access-policy',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'GetVaultAccessPolicyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'vaultName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
+                    'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
+        'GetVaultLock' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/{accountId}/vaults/{vaultName}/lock-policy',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'GetVaultLockOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'vaultName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
                 ),
             ),
             'errorResponses' => array(
@@ -503,11 +782,33 @@ return array (
                     'type' => 'string',
                     'location' => 'json',
                 ),
+                'InventoryRetrievalParameters' => array(
+                    'type' => 'object',
+                    'location' => 'json',
+                    'properties' => array(
+                        'StartDate' => array(
+                            'type' => 'string',
+                        ),
+                        'EndDate' => array(
+                            'type' => 'string',
+                        ),
+                        'Limit' => array(
+                            'type' => 'string',
+                        ),
+                        'Marker' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
             ),
             'errorResponses' => array(
                 array(
                     'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
                     'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if a retrieval job would exceed the current data policy\'s retrieval rate limit. For more information about data retrieval policies,',
+                    'class' => 'PolicyEnforcedException',
                 ),
                 array(
                     'reason' => 'Returned if a parameter of the request is incorrectly specified.',
@@ -549,6 +850,47 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-part-size',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
+                    'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
+        'InitiateVaultLock' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/{accountId}/vaults/{vaultName}/lock-policy',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'InitiateVaultLockOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'vaultName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'Policy' => array(
+                    'type' => 'string',
+                    'location' => 'json',
                 ),
             ),
             'errorResponses' => array(
@@ -718,6 +1060,43 @@ return array (
                 ),
             ),
         ),
+        'ListTagsForVault' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/{accountId}/vaults/{vaultName}/tags',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'ListTagsForVaultOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'vaultName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
+                    'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
         'ListVaults' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/vaults',
@@ -737,6 +1116,141 @@ return array (
                 'limit' => array(
                     'type' => 'string',
                     'location' => 'query',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
+                    'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
+        'RemoveTagsFromVault' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/{accountId}/vaults/{vaultName}/tags?operation=remove',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'vaultName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'TagKeys' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'string',
+                        'type' => 'string',
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.',
+                    'class' => 'ResourceNotFoundException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
+        'SetDataRetrievalPolicy' => array(
+            'httpMethod' => 'PUT',
+            'uri' => '/{accountId}/policies/data-retrieval',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'Policy' => array(
+                    'type' => 'object',
+                    'location' => 'json',
+                    'properties' => array(
+                        'Rules' => array(
+                            'type' => 'array',
+                            'items' => array(
+                                'name' => 'DataRetrievalRule',
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Strategy' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'BytesPerHour' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Returned if a parameter of the request is incorrectly specified.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if a required header or parameter is missing from the request.',
+                    'class' => 'MissingParameterValueException',
+                ),
+                array(
+                    'reason' => 'Returned if the service cannot complete the request.',
+                    'class' => 'ServiceUnavailableException',
+                ),
+            ),
+        ),
+        'SetVaultAccessPolicy' => array(
+            'httpMethod' => 'PUT',
+            'uri' => '/{accountId}/vaults/{vaultName}/access-policy',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'accountId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'vaultName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                ),
+                'Policy' => array(
+                    'type' => 'string',
+                    'location' => 'json',
                 ),
             ),
             'errorResponses' => array(
@@ -1040,6 +1554,27 @@ return array (
                     'type' => 'string',
                     'location' => 'json',
                 ),
+                'InventoryRetrievalParameters' => array(
+                    'type' => 'object',
+                    'location' => 'json',
+                    'properties' => array(
+                        'Format' => array(
+                            'type' => 'string',
+                        ),
+                        'StartDate' => array(
+                            'type' => 'string',
+                        ),
+                        'EndDate' => array(
+                            'type' => 'string',
+                        ),
+                        'Limit' => array(
+                            'type' => 'string',
+                        ),
+                        'Marker' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
             ),
         ),
         'DescribeVaultOutput' => array(
@@ -1069,6 +1604,33 @@ return array (
                 'SizeInBytes' => array(
                     'type' => 'numeric',
                     'location' => 'json',
+                ),
+            ),
+        ),
+        'GetDataRetrievalPolicyOutput' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Policy' => array(
+                    'type' => 'object',
+                    'location' => 'json',
+                    'properties' => array(
+                        'Rules' => array(
+                            'type' => 'array',
+                            'items' => array(
+                                'name' => 'DataRetrievalRule',
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Strategy' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'BytesPerHour' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),
@@ -1109,6 +1671,38 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-archive-description',
+                ),
+            ),
+        ),
+        'GetVaultAccessPolicyOutput' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Policy' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+        ),
+        'GetVaultLockOutput' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Policy' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+                'State' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+                'ExpirationDate' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+                'CreationDate' => array(
+                    'type' => 'string',
+                    'location' => 'json',
                 ),
             ),
         ),
@@ -1159,6 +1753,17 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-multipart-upload-id',
+                ),
+            ),
+        ),
+        'InitiateVaultLockOutput' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'lockId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-lock-id',
                 ),
             ),
         ),
@@ -1220,6 +1825,26 @@ return array (
                             ),
                             'RetrievalByteRange' => array(
                                 'type' => 'string',
+                            ),
+                            'InventoryRetrievalParameters' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Format' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'StartDate' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'EndDate' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'Limit' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'Marker' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
                             ),
                         ),
                     ),
@@ -1311,6 +1936,19 @@ return array (
                 ),
             ),
         ),
+        'ListTagsForVaultOutput' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Tags' => array(
+                    'type' => 'object',
+                    'location' => 'json',
+                    'additionalProperties' => array(
+                        'type' => 'string',
+                    ),
+                ),
+            ),
+        ),
         'ListVaultsOutput' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -1359,6 +1997,32 @@ return array (
                     'sentAs' => 'x-amz-sha256-tree-hash',
                 ),
             ),
+        ),
+    ),
+    'iterators' => array(
+        'ListJobs' => array(
+            'input_token' => 'marker',
+            'output_token' => 'Marker',
+            'limit_key' => 'limit',
+            'result_key' => 'JobList',
+        ),
+        'ListMultipartUploads' => array(
+            'input_token' => 'marker',
+            'output_token' => 'Marker',
+            'limit_key' => 'limit',
+            'result_key' => 'UploadsList',
+        ),
+        'ListParts' => array(
+            'input_token' => 'marker',
+            'output_token' => 'Marker',
+            'limit_key' => 'limit',
+            'result_key' => 'Parts',
+        ),
+        'ListVaults' => array(
+            'input_token' => 'marker',
+            'output_token' => 'Marker',
+            'limit_key' => 'limit',
+            'result_key' => 'VaultList',
         ),
     ),
     'waiters' => array(

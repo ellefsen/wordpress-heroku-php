@@ -24,13 +24,13 @@ use Aws\Common\Enum;
 class InstanceGroupState extends Enum
 {
     const PROVISIONING = 'PROVISIONING';
-    const STARTING = 'STARTING';
     const BOOTSTRAPPING = 'BOOTSTRAPPING';
     const RUNNING = 'RUNNING';
     const RESIZING = 'RESIZING';
+    const SUSPENDED = 'SUSPENDED';
+    const TERMINATING = 'TERMINATING';
+    const TERMINATED = 'TERMINATED';
     const ARRESTED = 'ARRESTED';
     const SHUTTING_DOWN = 'SHUTTING_DOWN';
-    const TERMINATED = 'TERMINATED';
-    const FAILED = 'FAILED';
     const ENDED = 'ENDED';
 }

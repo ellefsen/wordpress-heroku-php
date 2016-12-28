@@ -16,6 +16,7 @@
 
 namespace Aws\Common;
 
+use Aws\Common\Facade\Facade;
 use Guzzle\Service\Builder\ServiceBuilder;
 use Guzzle\Service\Builder\ServiceBuilderLoader;
 
@@ -27,7 +28,7 @@ class Aws extends ServiceBuilder
     /**
      * @var string Current version of the SDK
      */
-    const VERSION = '2.4.3';
+    const VERSION = '2.8.18';
 
     /**
      * Create a new service locator for the AWS SDK
@@ -94,13 +95,11 @@ class Aws extends ServiceBuilder
      * @param string|null $namespace The namespace that the facades should be mounted to. Defaults to global namespace
      *
      * @return Aws
+     * @deprecated "Facades" are being removed in version 3.0 of the SDK.
      */
     public function enableFacades($namespace = null)
     {
-        $facadeClass = 'Aws\\Common\\Facade\\Facade';
-        if (class_exists($facadeClass)) {
-            $facadeClass::mountFacades($this, $namespace);
-        }
+        Facade::mountFacades($this, $namespace);
 
         return $this;
     }

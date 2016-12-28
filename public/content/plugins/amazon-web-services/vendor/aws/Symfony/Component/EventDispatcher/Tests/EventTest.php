@@ -35,7 +35,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->event = new Event;
+        $this->event = new Event();
         $this->dispatcher = new EventDispatcher();
     }
 
@@ -46,7 +46,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->event = null;
-        $this->eventDispatcher = null;
+        $this->dispatcher = null;
     }
 
     public function testIsPropagationStopped()
@@ -60,23 +60,35 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->event->isPropagationStopped());
     }
 
-    public function testSetDispatcher()
+    /**
+     * @group legacy
+     */
+    public function testLegacySetDispatcher()
     {
         $this->event->setDispatcher($this->dispatcher);
         $this->assertSame($this->dispatcher, $this->event->getDispatcher());
     }
 
-    public function testGetDispatcher()
+    /**
+     * @group legacy
+     */
+    public function testLegacyGetDispatcher()
     {
         $this->assertNull($this->event->getDispatcher());
     }
 
-    public function testGetName()
+    /**
+     * @group legacy
+     */
+    public function testLegacyGetName()
     {
         $this->assertNull($this->event->getName());
     }
 
-    public function testSetName()
+    /**
+     * @group legacy
+     */
+    public function testLegacySetName()
     {
         $this->event->setName('foo');
         $this->assertEquals('foo', $this->event->getName());

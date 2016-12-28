@@ -17,6 +17,6 @@
 namespace Aws\ElastiCache\Exception;
 
 /**
- * Request subnet is currently in use.
+ * The requested subnet is being used by another cache subnet group.
  */
 class SubnetInUseException extends ElastiCacheException {}
