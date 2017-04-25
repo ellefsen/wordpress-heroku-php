@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "888f70798ba0c03a2bfff6093558ff9b",
-    "content-hash": "6cdc3c413b6a31c07f9ff7feaaaf365c",
+    "content-hash": "cd7cfdd7652bf50a396d2210840bed8f",
     "packages": [
         {
             "name": "fancyguy/webroot-installer",
@@ -47,14 +46,14 @@
             ],
             "description": "A composer installer for libraries that live in an application webroot.",
             "homepage": "http://fancyguy.github.com/webroot-installer/",
-            "time": "2013-01-29 22:51:45"
+            "time": "2013-01-29T22:51:45+00:00"
         },
         {
             "name": "wordpress",
-            "version": "4.7",
+            "version": "4.7.3",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/WordPress/WordPress/archive/4.7.zip",
+                "url": "https://github.com/WordPress/WordPress/archive/4.7.3.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -71,12 +70,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "960199a978308c75926fd9bb4775f7113bf1d777"
+                "reference": "e0499a7fdffd56f46534a037a6c48d65cef4e645"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/960199a978308c75926fd9bb4775f7113bf1d777",
-                "reference": "960199a978308c75926fd9bb4775f7113bf1d777",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/e0499a7fdffd56f46534a037a6c48d65cef4e645",
+                "reference": "e0499a7fdffd56f46534a037a6c48d65cef4e645",
                 "shasum": ""
             },
             "bin": [
@@ -107,7 +106,7 @@
                 "nginx",
                 "php"
             ],
-            "time": "2016-12-09 19:37:38"
+            "time": "2017-02-20 15:05:49"
         }
     ],
     "aliases": [],
