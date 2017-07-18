@@ -14,6 +14,10 @@
  * @package WordPress
  */
 
+require_once(__DIR__ . '/../vendor/autoload.php');
+(new \Dotenv\Dotenv(__DIR__.'/../'))->load();
+
+
 if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 
 	/** Declare Dev-mode for WordPress */
@@ -69,7 +73,7 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	define("DISALLOW_FILE_MODS", true );
 
 	/** For developers: WordPress debugging mode. */
-	define("WP_DEBUG", false);
+	define("WP_DEBUG", getenv("WP_DEBUG") == "true");
 
 }
 
