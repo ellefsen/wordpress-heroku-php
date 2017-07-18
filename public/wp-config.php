@@ -69,7 +69,7 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	define("DISALLOW_FILE_MODS", true );
 
 	/** For developers: WordPress debugging mode. */
-	define("WP_DEBUG", false);
+	define("WP_DEBUG", getenv("WP_DEBUG") == "true");
 
 }
 
