@@ -20,7 +20,8 @@
   "require": {
     "php": ">=5.3.0",
     "wordpress": "4.8",
-    "fancyguy/webroot-installer": "1.0.0"
+    "fancyguy/webroot-installer": "1.0.0",
+    "vlucas/phpdotenv": "^2.4"
   },
   "extra": {
     "webroot-dir": "public/wp",
