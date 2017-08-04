@@ -15,7 +15,7 @@
  */
 
 require_once(__DIR__ . '/../vendor/autoload.php');
-(new \Dotenv\Dotenv(__DIR__.'/../'))->load();
+if(!getenv("CLEARDB_DATABASE_URL")) (new \Dotenv\Dotenv(__DIR__.'/../'))->load();
 
 if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 
