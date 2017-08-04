@@ -16,6 +16,7 @@ Use the Deploy to Heroku button, or use the old fashioned way described below.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+### Old fashioned
 Clone this repository into a new directory.
 
 Create your Heroku app.
