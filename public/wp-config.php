@@ -15,7 +15,7 @@
  */
 
 require_once(__DIR__ . '/../vendor/autoload.php');
-(new \Dotenv\Dotenv(__DIR__.'/../'))->load();
+// (new \Dotenv\Dotenv(__DIR__.'/../'))->load();
 
 if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 
@@ -104,7 +104,7 @@ define('NONCE_SALT',       'put your unique phrase here');
  *
  * You can have multiple installations in one database if you give each a unique
  * prefix. Only numbers, letters, and underscores please!
- */	
+ */
 $table_prefix  = "wp_";
 
 /**
