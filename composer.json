@@ -7,7 +7,7 @@
     "package": {
       "name": "wordpress",
       "type": "webroot",
-      "version": "4.8.1",
+      "version": "5.3.2",
       "dist": {
         "type": "zip",
         "url": "https://github.com/WordPress/WordPress/archive/4.8.1.zip"
